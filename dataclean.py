@@ -2,16 +2,14 @@
 
 import pandas as pd
 
-def plot(fileName):
+def plot(df):
     import matplotlib.pyplot as plt
     import seaborn as sns
-    df = pd.read_csv(fileName + '.csv')
     sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis')
     plt.show()
 
-def priceData(fileName,lower,upper):
+def priceData(df,lower,upper):
     "takes in file name and price range and returns clean data"
-    df = pd.read_csv(fileName + '.csv')
 
     def impute_price(cols):
         "takes price columns colums and removes $"
@@ -26,19 +24,19 @@ def priceData(fileName,lower,upper):
     #price range
     df= df[df['price'] != lower]
     df = df[df['price']< upper]
-    
+
     df.to_csv('clean' + fileName + '.csv',index=False,header=True)
     return df
 
 def name(data, *args):
-    "takes a dataframe and a list of words that wont be displayed in the title"
+    "takes a dataframe and a list of words that must be displayed in the title"
     for i in args:
-        data = data[~data.title.str.contains(i)]
+        data = data[data.title.str.contains(i)]
     return data
 
 if __name__ == "__main__":
-    filename = 'file name'
+    df = pd.read_csv("filename.csv")
     data = priceData(filename,0,100)
-    df = name(data,"words","you","dont","want")
+    df = name(data,"words you want")
 
-    df.to_csv('data.csv',index=False,header=True)
+    df.to_csv('final.csv',index=False,header=True)
