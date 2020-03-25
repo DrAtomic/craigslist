@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 
-#ya9jABCgFtMnAj8
-#password
-#email
-#Lucas Maloney
-#lucas.alan.maloney@gmail.com
 
-import smtplib, ssl
+import csv, smtplib, ssl
 
-port = 465  # For SSL
-smtp_server = "smtp.gmail.com"
-sender_email = "lucas.alan.maloney@gmail.com"  # Enter your address
-receiver_email = "leo.ward.garcia@gmail.com"  # Enter receiver address
-password = ya9jABCgFtMnAj8
-message = """\
-Subject: Hi there
-
-This message is sent from Python."""
+message = """Subject: subject here
+message here
+"""
+from_address = "email here"
+password = 'password here'
 
 context = ssl.create_default_context()
-with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-    server.login(sender_email, password)
-    server.sendmail(sender_email, receiver_email, message)
+with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+    server.login(from_address, password)
+    with open("dataWithEmail.csv") as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip header row
+        for email in reader:
+            try:
+                server.sendmail(
+                    from_address,
+                    email,
+                    message)
+            except:
+                pass
+
