@@ -63,7 +63,6 @@ if __name__ =="__main__":
     states = ['ca']
     links = stateLinks(states)
     data = searchLinks(links,"search item")
-    
     data.to_csv('locate.csv',index=False,header=True)
     print(data)
     print('done')

@@ -24,6 +24,4 @@ def crawl(df):
     email_dataFrame = pd.DataFrame({'email':email})
     newDataframe = df.join(email_dataFrame)
 
-    newDataframe.to_csv('dataWithEmail.csv',index=False,header=True)
-
     return newDataframe
