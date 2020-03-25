@@ -14,7 +14,7 @@ def crawl(df):
         try:
             button = browser.find_element_by_css_selector('.reply-button')
             button.click()
-            time.sleep(10)
+            time.sleep(3)
             email.append(browser.find_element_by_css_selector('.mailapp').text)
         except:
             email.append("link not found")
@@ -29,5 +29,3 @@ def crawl(df):
     print(newDataframe)
     return newDataframe
 df = pd.read_csv('finalTP.csv')
-
-#crawl(df)
