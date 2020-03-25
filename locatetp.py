@@ -28,21 +28,24 @@ def searchLinks(links,search):
     linkAd = []
     priceAd = []
     for link in links:
-        response = get(link + '/search/sss?query='+ search +'&sort=rel')
-        soup = bs4.BeautifulSoup(response.text, 'html.parser')
-        posts = soup.find_all('li', class_= 'result-row')
-        post_title_texts = []
-        post_links = []
-        post_prices = []
-        for post in posts:
-            if post.find('span', class_ = 'result-hood') is not None:
-                post_title = post.find('a', class_='result-title hdrlnk')
-                post_title_text = post_title.text
-                post_title_texts.append(post_title_text.lower())
-                post_link = post_title['href']
-                post_links.append(post_link)
-                post_price = post.a.text.strip()
-                post_prices.append(post_price)
+        try:
+            response = get(link + '/search/sss?query='+ search +'&sort=rel')
+            soup = bs4.BeautifulSoup(response.text, 'html.parser')
+            posts = soup.find_all('li', class_= 'result-row')
+            post_title_texts = []
+            post_links = []
+            post_prices = []
+            for post in posts:
+                if post.find('span', class_ = 'result-hood') is not None:
+                    post_title = post.find('a', class_='result-title hdrlnk')
+                    post_title_text = post_title.text
+                    post_title_texts.append(post_title_text.lower())
+                    post_link = post_title['href']
+                    post_links.append(post_link)
+                    post_price = post.a.text.strip()
+                    post_prices.append(post_price)
+        except:
+            pass
 
         for i in range(len(post_title_texts)):
             if (post_title_texts[i].find(search) != -1):
@@ -54,11 +57,13 @@ def searchLinks(links,search):
                                'link':linkAd,
                                'price':priceAd})
 
-    searchAdDf.to_csv(search+'.csv',index=False,header=True)
     return searchAdDf
 
-states = ['ca']
-links = stateLinks(states)
-data = searchLinks(links,"search item")
-print(data)
-print('done')
+if __name__ =="__main__":
+    states = ['ca']
+    links = stateLinks(states)
+    data = searchLinks(links,"search item")
+    
+    data.to_csv('locate.csv',index=False,header=True)
+    print(data)
+    print('done')
