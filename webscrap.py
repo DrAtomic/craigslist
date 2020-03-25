@@ -26,6 +26,4 @@ def crawl(df):
 
     newDataframe.to_csv('dataWithEmail.csv',index=False,header=True)
 
-    print(newDataframe)
     return newDataframe
-df = pd.read_csv('finalTP.csv')
