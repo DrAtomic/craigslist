@@ -28,6 +28,7 @@ def priceData(df,lower,upper):
     df.to_csv('clean' + fileName + '.csv',index=False,header=True)
     return df
 
+#TODO: this function is bad it doesn't need *args 
 def name(data, *args):
     "takes a dataframe and a list of words that must be displayed in the title"
     for i in args:
