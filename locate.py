@@ -9,7 +9,7 @@ def stateLinks(states):
     links = []
     for i in range(len(states)):
         res.append(get('https://geo.craigslist.org/iso/us/'+states[i]))
-        soup.append(bs4.BeautifulSoup(res[i].text))
+        soup.append(bs4.BeautifulSoup(res[i].text,"html.parser"))
 
     #adds data for each soup
     for j in range(len(soup)):
