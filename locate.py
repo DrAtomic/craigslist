@@ -1,4 +1,3 @@
-
 import bs4
 from requests import get
 import pandas as pd

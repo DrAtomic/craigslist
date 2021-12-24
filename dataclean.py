@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import pandas as pd
 
 def plot(df):
@@ -7,18 +5,19 @@ def plot(df):
     import seaborn as sns
     sns.heatmap(df.isnull(),yticklabels=False,cbar=False,cmap='viridis')
     plt.show()
+    
+def impute_price(cols):
+    "takes price columns colums and removes $"
+    price = cols[0]
+    if pd.isna(price):
+        return 0
+    else:
+        price = price.replace(",","")
+        price = int(price.replace("$",""))
+        return price
 
 def priceData(df,lower,upper):
     "takes in file name and price range and returns clean data"
-
-    def impute_price(cols):
-        "takes price columns colums and removes $"
-        price = cols[0]
-        if pd.isna(price):
-            return 0
-        else:
-            return int(price.replace("$",""))
-
     df['price'] = df[['price']].apply(impute_price,axis=1)
     #price range
     df= df[df['price'] != lower]
@@ -35,7 +34,7 @@ def name(data, *args):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("name of csv")
+    df = pd.read_csv("locate.csv")
     data = priceData(df,0,100)
     print(data)
     df = name(data,"words","you","want")
