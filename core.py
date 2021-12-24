@@ -1,9 +1,18 @@
 import pandas as pd
 import json
+from os.path import exists
 import locate
 import dataclean
 import webscrape
 import craigEmail
+
+def create_listing(states,item):
+    "takes list of states and item returns searched listing and creates \
+    a csv of listings"
+    statelinks = locate.stateLinks(states)
+    searched = locate.searchLinks(statelinks,item)
+    searched.to_csv('listings.csv',index=False,header=True)
+    return searched
 
 if __name__ == '__main__':
     
@@ -14,13 +23,22 @@ if __name__ == '__main__':
     item = config['item']
     lowerprice = config['lowerprice']
     upperprice = config['upperprice']
-    #locate
-    statelinks = locate.stateLinks(states)
-    searched = locate.searchLinks(statelinks,item)
-
+    
+    #check for csv
+    if exists("listings.csv"):
+        print('listings csv exists do you want to use that?: ')
+        answer = input()
+        if answer == 'y':
+            #use same listing
+            searched = pd.read_csv('listings.csv')
+        else:
+            #create new listing
+            searched = create_listing(states,item)
+    else:
+        #create new listing
+        searched = create_listing(states, item)
+        
     #dataclean
-    searched.to_csv('beforebreak.csv',index=False,header=True)
-    searched = pd.read_csv('beforebreak.csv')
     priced = dataclean.priceData(searched,lowerprice,upperprice)
     nameFix = dataclean.name(priced,item)
     print(nameFix)

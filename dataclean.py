@@ -9,7 +9,7 @@ def plot(df):
 def impute_price(cols):
     "takes price columns colums and removes $"
     price = cols[0]
-    if pd.isna(price):
+    if pd.isna(price) or price == "":
         return 0
     else:
         price = price.replace(",","")
@@ -20,10 +20,8 @@ def priceData(df,lower,upper):
     "takes in file name and price range and returns clean data"
     df['price'] = df[['price']].apply(impute_price,axis=1)
     #price range
-    df= df[df['price'] != lower]
-    df = df[df['price']< upper]
-
-    #df.to_csv('cleanData.csv',index=False,header=True)
+    df = df[df['price'] != lower]
+    df = df[df['price'] < upper]
     return df
 
 def name(data, *args):
