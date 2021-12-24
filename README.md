@@ -7,6 +7,7 @@ post titles, price, link to listing.
 # Requirements
 
 ```
+sudo apt install firefox geckodriver
 pip install -R requirements.txt
 ```
 
