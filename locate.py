@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 import bs4
 from requests import get
@@ -29,7 +28,7 @@ def searchLinks(links,search):
     priceAd = []
     for link in links:
         try:
-            response = get(link + '/search/sss?query='+ search +'&sort=rel')
+            response = get(link + 'd/for-sale/search/sss?query='+ search +'&sort=rel')
             soup = bs4.BeautifulSoup(response.text, 'html.parser')
             posts = soup.find_all('li', class_= 'result-row')
             post_title_texts = []
@@ -62,7 +61,7 @@ def searchLinks(links,search):
 if __name__ =="__main__":
     states = ['ca']
     links = stateLinks(states)
-    data = searchLinks(links,"search item")
+    data = searchLinks(links,"pots")
     data.to_csv('locate.csv',index=False,header=True)
     print(data)
     print('done')
