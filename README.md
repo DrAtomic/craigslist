@@ -22,14 +22,20 @@ pip install seaborn
 
 # Usage
 
-Usage is not ideal right now, you have to manually go into core.py and edit the
+you have to manually go into cfg.json and edit the
 states list, item, lowerprice, upperprice. for example
 
-```
-states = ['ca']
-item = "toilet paper"
-lowerprice = 10
-upperprice = 500
+```json
+{
+    "states": [
+		"ca",
+		"wa",
+		"or"
+    ],
+    "item": "covid test",
+    "lowerprice": 0,
+    "upperprice": 500
+}
 ```
 after that is edited run 
 
