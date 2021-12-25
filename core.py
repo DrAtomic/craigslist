@@ -26,8 +26,7 @@ if __name__ == '__main__':
     
     #check for csv
     if exists("listings.csv"):
-        print('listings csv exists do you want to use that?: ')
-        answer = input()
+        answer = input('listings csv exists do you want to use that?[y/n]: ')
         if answer == 'y':
             #use same listing
             searched = pd.read_csv('listings.csv')
@@ -42,9 +41,8 @@ if __name__ == '__main__':
     priced = dataclean.priceData(searched,lowerprice,upperprice)
     nameFix = dataclean.name(priced,item)
     print(nameFix)
-    print('do you want to continue?: ')
-    x = input()
-    if x == 'n':
+    answer = input('do you want to continue?[y/n]: ')
+    if answer == 'n':
         exit()
     else:
         #webscrape

@@ -12,6 +12,7 @@ def impute_price(cols):
     if pd.isna(price) or price == "":
         return 0
     else:
+        price = str(price)
         price = price.replace(",","")
         price = int(price.replace("$",""))
         return price
