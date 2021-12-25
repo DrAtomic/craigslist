@@ -6,7 +6,7 @@ post titles, price, link to listing.
 
 # Requirements
 
-```
+```bash
 sudo apt install firefox geckodriver
 pip install -R requirements.txt
 ```
@@ -15,31 +15,38 @@ pip install -R requirements.txt
 There is an optional plot of the dataframe for missing prices, i thought
 it was useful so I left it in
 
-```
+```bash
 pip install matplotlib
 pip install seaborn
 ```
 
 # Usage
 
-you have to manually go into cfg.json and edit the
-states list, item, lowerprice, upperprice. for example
+copy this into a file named cfg.json and edit the
+states list, item, lowerprice, upperprice, email address, password, subject, body.
 
 ```json
 {
-    "states": [
-		"ca",
-		"wa",
-		"or"
-    ],
-    "item": "covid test",
-    "lowerprice": 0,
-    "upperprice": 500
+    "search": {
+		"states": [
+			"ca",
+			"or"
+		],
+		"item": "toilet paper",
+		"lowerprice": 50,
+		"upperprice": 1000
+    },
+    "email": {
+		"address": "emailaddress@domain.com",
+		"password": "email_password",
+		"subject": "toilet paper ad",
+		"body": "hello, I'm intersted in the toilet paper. Is it still available?"
+    }
 }
 ```
 after that is edited run 
 
-```
+```bash
 python core.py
 ```
 
