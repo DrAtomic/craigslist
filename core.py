@@ -49,7 +49,7 @@ if __name__ == '__main__':
     else:
         #webscrape
         crawling = webscrape.crawl(nameFix)
-        crawling.to_csv('dataEmail.csv')
+        crawling.to_csv('listings.csv',index=False,header=True)
         
         #email section
         # subject = item
