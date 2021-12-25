@@ -20,8 +20,8 @@ def priceData(df,lower,upper):
     "takes in file name and price range and returns clean data"
     df['price'] = df[['price']].apply(impute_price,axis=1)
     #price range
-    df = df[df['price'] != lower]
-    df = df[df['price'] < upper]
+    df = df[df['price'] >= lower]
+    df = df[df['price'] <= upper]
     return df
 
 def name(data, *args):

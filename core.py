@@ -19,10 +19,10 @@ if __name__ == '__main__':
     #config
     with open("cfg.json") as file:
         config = json.load(file)
-    states = config['states']
-    item = config['item']
-    lowerprice = config['lowerprice']
-    upperprice = config['upperprice']
+    states = config['search']['states']
+    item = config['search']['item']
+    lowerprice = config['search']['lowerprice']
+    upperprice = config['search']['upperprice']
     
     #check for csv
     if exists("listings.csv"):
@@ -52,9 +52,9 @@ if __name__ == '__main__':
         crawling.to_csv('listings.csv',index=False,header=True)
         
         #email section
-        # subject = item
-        # body = "body of message here"
-        # sender = "sender email address"
-        # password = "password to sender email"
-        
-        # craigEmail.sendEmail(crawling, subject, body, sender, password)
+        subject = config['email']['subject']
+        body = config['email']['body']
+        sender = config['email']['address']
+        password = config['email']['password']
+            
+        craigEmail.sendEmail(crawling, subject, body, sender, password)

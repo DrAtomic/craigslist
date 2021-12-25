@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import pandas as pd
 import csv, smtplib, ssl
 from email.message import EmailMessage

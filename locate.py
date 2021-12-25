@@ -53,7 +53,7 @@ def searchLinks(links,search):
 
     searchAdDf = pd.DataFrame({'title':searchAd,
                                'link':linkAd,
-                               'price':priceAd
+                               'price':priceAd,
                                'email':''})
 
     return searchAdDf
