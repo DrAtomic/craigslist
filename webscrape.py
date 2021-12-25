@@ -22,7 +22,7 @@ def crawl(df):
 
     browser.quit()
 
-    email_dataFrame = pd.DataFrame({'email':email})
-    newDataframe = df.join(email_dataFrame)
+    df.drop('email',axis = 1, inplace = True)
+    df['email'] = email
 
-    return newDataframe
+    return df
